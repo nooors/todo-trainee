@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="title">
+    <input type="text" [formControl]="title" />
+  </div>
+
+  <p class="date">{{ taskDate | date:'short'}}</p>
+  <textarea
+    class="data"
+    [formControl]="description"
+    id=""
+    cols="30"
+    rows="10"
+  ></textarea>
+  <button type="button" (click)="saveData()">Save</button>
+  <button type="button" (click)="resetData()">Reset</button>
+</div>
