@@ -1,14 +1,17 @@
-.card{
-    border: 1px solid black;
-    border-top-left-radius:1.5rem ;
-    border-top-right-radius:1.5rem ;
-    max-width: 30%;
-    .title{
-        border-top-left-radius:1.5rem ;
-        border-top-right-radius:1.5rem ;
-        background-color: rgb(192, 3, 250);
-        color: wheat;
-        padding: 1rem;
-    }
-}
 
+    .card-content__task {
+        flex-grow: 1;
+        border: 1px solid black;
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        max-width: 30%;
+        margin: auto;
+
+        .title {
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+            background-color: rgb(192, 3, 250);
+            color: wheat;
+            padding: 1rem;
+        }
+    }
