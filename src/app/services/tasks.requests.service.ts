@@ -14,4 +14,8 @@ export class TasksRequestService {
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.BASE_URL);
   }
+
+  getTaskById(n: number): Observable<Task> {
+    return this.http.get<Task>(`${this.BASE_URL}/${n}`);
+  }
 }

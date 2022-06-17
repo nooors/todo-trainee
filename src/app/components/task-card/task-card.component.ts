@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
 import { Task } from "../../models/task-model";
+import { TasksRequestService } from "src/app/services/tasks.requests.service";
 
 @Component({
   selector: "app-task-card",
@@ -8,29 +8,15 @@ import { Task } from "../../models/task-model";
   styleUrls: ["./task-card.component.scss"],
 })
 export class TaskCardComponent implements OnInit {
-  @Input() item!: Task;
-  taskDate: Date = new Date();
-  title = new FormControl("");
-  description = new FormControl("");
   task!: Task;
+  n: number = 1;
 
-  saveData(): Task {
-    this.task = {
-      id: 1,
-      title: this.title.value,
-      taskDate: this.taskDate.toDateString(),
-      description: this.description.value,
-    };
-    console.log(this.task);
-    return this.task;
+  constructor(private taskSrv: TasksRequestService) {}
+
+  ngOnInit(): void {
+    this.getTask();
   }
-
-  resetData() {
-    this.title.reset();
-    this.description.reset();
+  getTask() {
+    this.taskSrv.getTaskById(this.n).subscribe((task) => (this.task = task));
   }
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

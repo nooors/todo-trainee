@@ -37,17 +37,29 @@ body {
   right: 0;
   height: 60px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-color: #1976d2;
   color: white;
   font-weight: 600;
   margin-bottom: 4rem;
+  
 }
 
 .toolbar img {
   margin: 0 16px;
 }
 
+.logo-wrapper{
+  margin-left: 1.5rem; 
+}
+
+.button-wrapper{
+  margin-right: 1.5rem;
+}
+button.mat-raised-button{
+  margin-left: .5rem;
+}
 .content {
 
   margin-top: 6rem;

@@ -1,0 +1,18 @@
+<mat-card class="task-card">
+  <div class="title-wrapper">
+    <mat-card-title class="task-card-title">{{task.title}}</mat-card-title>
+    <mat-card-subtitle>{{task.taskDate}}</mat-card-subtitle>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-card-content>Sub-Tasks</mat-card-content>
+  <mat-selection-list dense>
+    <mat-list-option *ngFor="let item of task.subTasks">
+      {{item}}
+    </mat-list-option>
+  </mat-selection-list>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">Save</button>
+    <button mat-raised-button color="accent">Cancel</button>
+  </mat-card-actions>
+</mat-card>

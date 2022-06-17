@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Task } from "./models/task-model";
 import { TasksRequestService } from "./services/tasks.requests.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -10,7 +11,10 @@ import { TasksRequestService } from "./services/tasks.requests.service";
 export class AppComponent {
   title = "todo-trainee";
   tasks!: Task[];
-  constructor(private taskService: TasksRequestService) {}
+  constructor(
+    private taskService: TasksRequestService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.getTasks();
@@ -18,5 +22,9 @@ export class AppComponent {
 
   getTasks() {
     this.taskService.getTasks().subscribe((tasks) => (this.tasks = tasks));
+  }
+
+  goToTasks() {
+    this.router.navigate(["tasks"]);
   }
 }

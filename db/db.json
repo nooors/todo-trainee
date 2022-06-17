@@ -1,0 +1,45 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "learn Angular",
+      "taskDate": "Wed Jun 15 2022",
+      "deadLine": "",
+      "description": "just the name is cool",
+      "subTasks": [
+        "Get L2",
+        "Find an own place",
+        "Learn Angular",
+        "Rule the world"
+      ],
+      "pogress": "ToDo"
+    },
+    {
+      "id": 2,
+      "title": "get an appartament",
+      "taskDate": "Wed Jun 15 2022",
+      "deadLine": "",
+      "description": "I need some space",
+      "subTasks": [],
+      "pogress": "ToDo"
+    },
+    {
+      "id": 3,
+      "title": "get a new bike",
+      "taskDate": "Wed Jun 15 2022",
+      "deadLine": "",
+      "description": "or not, not mandatory",
+      "subTasks": [],
+      "pogress": "ToDo"
+    },
+    {
+      "id": 4,
+      "title": "rule the world",
+      "taskDate": "Wed Jun 15 2022",
+      "deadLine": "",
+      "description": "it's inevitable",
+      "subTasks": [],
+      "pogress": "ToDo"
+    }
+  ]
+}
