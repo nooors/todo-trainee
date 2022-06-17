@@ -1,7 +1,7 @@
 <div class="tasks-render-wrap">
   <ul class="task-render-ul">
     <li class="task-render-item" *ngFor="let task of tasks">
-      <app-task-card></app-task-card>
+      <app-task-demo [task]="task"></app-task-demo>
     </li>
   </ul>
 </div>

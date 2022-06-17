@@ -3,7 +3,7 @@ import { Task } from "../../models/task-model";
 
 import { TasksRequestService } from "src/app/services/tasks.requests.service";
 import { Router } from "@angular/router";
-import { TaskCardComponent } from "../task-card/task-card.component";
+import { TaskDemoComponent } from "../task-demo/task-demo.component";
 
 @Component({
   selector: "app-tasks-render",

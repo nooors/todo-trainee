@@ -1,0 +1,21 @@
+@use '@angular/material' as mat;
+.task-card{
+    max-width: 30%;
+    min-width: 200px;
+    position: relative;
+    @include mat.elevation(5);
+}
+.title-wrapper{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+
+    .mat-card-title{
+        margin: auto;
+        margin-bottom: .5rem;
+    }
+}
+.mat-card-actions{
+    display: flex;
+    justify-content: center;
+}

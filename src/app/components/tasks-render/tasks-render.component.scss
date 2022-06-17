@@ -1,0 +1,9 @@
+.task-render-ul{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+    justify-content: center;
+    .task-render-item{
+        list-style: none;
+    }
+}
