@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 
 @Component({
   selector: "app-new-task",
@@ -20,12 +20,20 @@ export class NewTaskComponent implements OnInit {
     description: ["", Validators.required],
     subtasks: [],
     progress: ["ToDo", Validators.required],
+    subTasks: this.formBuilder.array([]),
   });
 
   submitForm() {}
 
   ngOnInit(): void {}
 
+  get subTasks() {
+    return this.newTaskForm.get("subTasks") as FormArray;
+  }
+
+  addSubTask() {
+    this.subTasks.push(this.formBuilder.control(""));
+  }
   close() {
     this.dialogRef.close();
   }

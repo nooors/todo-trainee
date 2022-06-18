@@ -1,12 +1,12 @@
 <h2 mat-dialog-title>New Task</h2>
 <mat-dialog-content>
   <form class="new-task-form" [formGroup]="newTaskForm" (submit)="submitForm()">
+    <!-- Title -->
     <mat-form-field class="whatever">
       <mat-label for="title">Title</mat-label>
       <input type="text" name="title" matInput formControlName="title" />
-      <mat-label for="date">Date</mat-label>
     </mat-form-field>
-
+    <!-- Date picker for initial Date -->
     <mat-form-field class="whaterver">
       <mat-label for="dateTask">Select starting date</mat-label>
       <input
@@ -21,6 +21,40 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #initialDate disabled="false"></mat-datepicker>
     </mat-form-field>
+    <!-- Date picker for dead line -->
+    <mat-form-field class="whaterver">
+      <mat-label for="deadLine">Select dead line date</mat-label>
+      <input
+        matInput
+        readonly
+        [matDatepicker]="lastDate"
+        formControlName="deadLine"
+      />
+      <mat-datepicker-toggle matSuffix [for]="lastDate"></mat-datepicker-toggle>
+      <mat-datepicker #lastDate disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <!-- Text area for description -->
+    <mat-form-field class="whatever">
+      <mat-label for="description">Description</mat-label>
+      <textarea
+        name="descrption"
+        matInput
+        formControlName="description"
+      ></textarea>
+    </mat-form-field>
+    <h2>Subtastks</h2>
+    <button mat-icon-button (click)="addSubTask()">
+      <mat-icon class="add-course-btn">add</mat-icon>
+    </button>
+    <ng-container *ngFor="let subTask of subTasks.controls; let i = index"
+      ><mat-form-field class="array">
+        <mat-label for="i">new task</mat-label>
+        <input matInput type="text" name="i" formControlName="i" />
+        <button mat-icon-button (click)="addSubTask()">
+          <mat-icon class="add-course-btn">add</mat-icon>
+        </button>
+      </mat-form-field>
+    </ng-container>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
