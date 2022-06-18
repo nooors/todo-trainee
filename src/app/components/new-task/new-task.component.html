@@ -1,1 +1,28 @@
-<p>new-task works!</p>
+<h2 mat-dialog-title>New Task</h2>
+<mat-dialog-content>
+  <form class="new-task-form" [formGroup]="newTaskForm" (submit)="submitForm()">
+    <mat-form-field class="whatever">
+      <mat-label for="title">Title</mat-label>
+      <input type="text" name="title" matInput formControlName="title" />
+      <mat-label for="date">Date</mat-label>
+    </mat-form-field>
+
+    <mat-form-field class="whaterver">
+      <mat-label for="dateTask">Select starting date</mat-label>
+      <input
+        matInput
+        readonly
+        [matDatepicker]="initialDate"
+        formControlName="taskDate"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="initialDate"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #initialDate disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>

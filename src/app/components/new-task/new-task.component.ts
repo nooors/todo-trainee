@@ -1,15 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { MatDialogRef } from "@angular/material/dialog";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-new-task',
-  templateUrl: './new-task.component.html',
-  styleUrls: ['./new-task.component.scss']
+  selector: "app-new-task",
+  templateUrl: "./new-task.component.html",
+  styleUrls: ["./new-task.component.scss"],
 })
 export class NewTaskComponent implements OnInit {
+  constructor(
+    private dialogRef: MatDialogRef<NewTaskComponent>,
+    private formBuilder: FormBuilder,
+  ) {}
 
-  constructor() { }
+  newTaskForm: FormGroup = this.formBuilder.group({
+    title: ["", Validators.required],
+    taskDate: [""],
+    deadLine: ["", Validators.required],
+    description: ["", Validators.required],
+    subtasks: [],
+    progress: ["ToDo", Validators.required],
+  });
 
-  ngOnInit(): void {
+  submitForm() {}
+
+  ngOnInit(): void {}
+
+  close() {
+    this.dialogRef.close();
   }
-
 }

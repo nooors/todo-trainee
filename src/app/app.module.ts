@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -22,19 +22,19 @@ import { NewTaskComponent } from "./components/new-task/new-task.component";
     TasksRenderComponent,
     TaskDemoComponent,
     NewTaskComponent,
-    NewTaskComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     // Import HttpClientModule after BrowserModule.
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
   ],
   providers: [],
-  entryComponents: [NewTaskComponent],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}
