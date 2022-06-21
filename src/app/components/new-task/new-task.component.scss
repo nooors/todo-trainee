@@ -1,5 +1,12 @@
+h1.mat-h1.title{
+    font-weight: 700;
+}
+
 .new-task-form{
-    display: flex;
-    flex-direction: column;
     padding: 2rem;
+}
+
+mat-dialog-content{
+    display: flex;
+    flex-flow: wrap column;
 }

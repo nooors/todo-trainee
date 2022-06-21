@@ -27,6 +27,7 @@ export class AppComponent {
     dialogConfig.disableClose = true;
     // Focus automatically set on the first form field of the dialog
     dialogConfig.autoFocus = true;
+    dialogConfig.maxWidth = "50vw";
 
     this.dialog.open(NewTaskComponent, dialogConfig);
   }

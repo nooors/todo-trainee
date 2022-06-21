@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>New Task</h2>
-<mat-dialog-content>
-  <form class="new-task-form" [formGroup]="newTaskForm" (submit)="submitForm()">
+<h1 mat-dialog-title class="title">New Task</h1>
+<form class="new-task-form" [formGroup]="newTaskForm">
+  <mat-dialog-content>
     <!-- Title -->
     <mat-form-field class="whatever">
       <mat-label for="title">Title</mat-label>
@@ -42,21 +42,45 @@
         formControlName="description"
       ></textarea>
     </mat-form-field>
-    <h2>Subtastks</h2>
-    <button mat-icon-button (click)="addSubTask()">
-      <mat-icon class="add-course-btn">add</mat-icon>
+    <!-- Subtasks -->
+    <div formArrayName="subTasks">
+      <h2>Subtastks</h2>
+      <button mat-icon-button (click)="addSubTask()">
+        <mat-icon class="add-course-btn">add</mat-icon>
+      </button>
+      <ng-container *ngFor="let subTask of subTasks.controls; let i = index"
+        ><mat-form-field class="select-array">
+          <mat-label>new task</mat-label>
+          <input matInput type="text" [formControlName]="i" /><button
+            mat-icon-button
+            matSuffix
+            (click)="removeTask(i)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-form-field>
+      </ng-container>
+    </div>
+    <!-- Progress -->
+    <mat-radio-group formControlName="progress">
+      <mat-radio-button value="ToDo">ToDo</mat-radio-button>
+      <mat-radio-button value="WIP">WIP</mat-radio-button>
+      <mat-radio-button value="Done">Done</mat-radio-button>
+    </mat-radio-group>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="close()">
+      Close
     </button>
-    <ng-container *ngFor="let subTask of subTasks.controls; let i = index"
-      ><mat-form-field class="array">
-        <mat-label for="i">new task</mat-label>
-        <input matInput type="text" name="i" formControlName="i" />
-        <button mat-icon-button (click)="addSubTask()">
-          <mat-icon class="add-course-btn">add</mat-icon>
-        </button>
-      </mat-form-field>
-    </ng-container>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button class="mat-raised-button" (click)="close()">Close</button>
-</mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!newTaskForm.valid"
+      (click)="submitForm()"
+    >
+      Submit
+    </button>
+    {{newTaskForm.valid}} {{ newTaskForm.value | json}}
+  </mat-dialog-actions>
+</form>

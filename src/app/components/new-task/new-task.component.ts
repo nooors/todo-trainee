@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+import { TasksRequestService } from "src/app/services/tasks.requests.service";
+import { Task } from "src/app/models/task-model";
 
 @Component({
   selector: "app-new-task",
@@ -8,9 +10,11 @@ import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
   styleUrls: ["./new-task.component.scss"],
 })
 export class NewTaskComponent implements OnInit {
+  tasks!: Task[];
   constructor(
     private dialogRef: MatDialogRef<NewTaskComponent>,
     private formBuilder: FormBuilder,
+    private httpSrv: TasksRequestService,
   ) {}
 
   newTaskForm: FormGroup = this.formBuilder.group({
@@ -18,14 +22,14 @@ export class NewTaskComponent implements OnInit {
     taskDate: [""],
     deadLine: ["", Validators.required],
     description: ["", Validators.required],
-    subtasks: [],
-    progress: ["ToDo", Validators.required],
     subTasks: this.formBuilder.array([]),
+    progress: ["ToDo", Validators.required],
   });
 
-  submitForm() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getLastId();
+    console.log(this.tasks);
+  }
 
   get subTasks() {
     return this.newTaskForm.get("subTasks") as FormArray;
@@ -34,7 +38,33 @@ export class NewTaskComponent implements OnInit {
   addSubTask() {
     this.subTasks.push(this.formBuilder.control(""));
   }
-  close() {
-    this.dialogRef.close();
+  removeTask(i: any) {
+    this.subTasks.removeAt(i);
+  }
+
+  submitForm() {
+    // Need to build the object to pass to the data base
+    console.log(this.newTaskForm);
+    const indexes = this.tasks.map((element) => element.id);
+    const max = Math.max(...indexes);
+    const newTask: Task = {
+      id: max + 1,
+      title: this.newTaskForm.get("title")?.value,
+      taskDate: this.newTaskForm.get("taskDate")?.value,
+      deadLine: this.newTaskForm.get("deadLine")?.value,
+      description: this.newTaskForm.get("description")?.value,
+      subTasks: this.newTaskForm.get("subTasks")?.value,
+      progress: this.newTaskForm.get("progress")?.value,
+    };
+    this.httpSrv.setNewTask(newTask).subscribe();
+    this.close();
+  }
+
+  close(): void {
+    this.dialogRef.close("false");
+  }
+
+  getLastId() {
+    this.httpSrv.getTasks().subscribe((tasks) => (this.tasks = tasks));
   }
 }
