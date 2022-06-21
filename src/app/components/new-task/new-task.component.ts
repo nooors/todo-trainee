@@ -44,7 +44,6 @@ export class NewTaskComponent implements OnInit {
 
   submitForm() {
     // Need to build the object to pass to the data base
-    console.log(this.newTaskForm);
     const indexes = this.tasks.map((element) => element.id);
     const max = Math.max(...indexes);
     const newTask: Task = {

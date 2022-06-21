@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { Task } from "src/app/models/task-model";
 
 @Component({
@@ -8,7 +9,10 @@ import { Task } from "src/app/models/task-model";
 })
 export class TaskDemoComponent implements OnInit {
   @Input() task!: Task;
-  constructor() {}
+  constructor(private dialogConfi: MatDialog) {}
+
+  editTask() {}
+  deleteTask() {}
 
   ngOnInit(): void {}
 }
