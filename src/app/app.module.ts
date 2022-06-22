@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TasksRenderComponent } from "./components/tasks-render/tasks-render.component";
 import { TaskDemoComponent } from "./components/task-demo/task-demo.component";
 import { NewTaskComponent } from "./components/new-task/new-task.component";
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NewTaskComponent } from "./components/new-task/new-task.component";
     TasksRenderComponent,
     TaskDemoComponent,
     NewTaskComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,

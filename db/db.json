@@ -42,24 +42,6 @@
       "pogress": "ToDo"
     },
     {
-      "id": 5
-    },
-    {
-      "body": "{\"id\":6,\"title\":\"sdfgs\",\"taskDate\":\"2022-06-20T22:00:00.000Z\",\"deadLine\":\"2022-06-21T22:00:00.000Z\",\"description\":\"wgqwg\",\"subTasks\":[\"d\",\"d\",\"d\"],\"progress\":\"WIP\"}",
-      "id": 6
-    },
-    {
-      "id": 7,
-      "title": "proba 2",
-      "taskDate": "2022-06-20T22:00:00.000Z",
-      "deadLine": "2022-06-29T22:00:00.000Z",
-      "description": "tdikuo",
-      "subTasks": [
-        "lgv"
-      ],
-      "progress": "WIP"
-    },
-    {
       "id": 8,
       "title": "Paranoia in Angular",
       "taskDate": "2022-06-23T22:00:00.000Z",
@@ -71,6 +53,18 @@
         "ver3"
       ],
       "progress": "WIP"
+    },
+    {
+      "id": 9,
+      "title": "lalala",
+      "taskDate": "2022-06-21T22:00:00.000Z",
+      "deadLine": "2022-07-20T22:00:00.000Z",
+      "description": "yiuikckc",
+      "subTasks": [
+        "fuif",
+        "kdcikdck"
+      ],
+      "progress": "Done"
     }
   ]
 }

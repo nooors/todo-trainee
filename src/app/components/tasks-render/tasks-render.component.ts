@@ -16,6 +16,9 @@ export class TasksRenderComponent implements OnInit {
   ngOnInit(): void {
     this.getTasks();
   }
+  ngOnChages(): void {
+    this.getTasks();
+  }
   getTasks() {
     this.TasksSvc.getTasks().subscribe((tasks) => (this.tasks = tasks));
   }

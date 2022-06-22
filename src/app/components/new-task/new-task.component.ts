@@ -38,7 +38,7 @@ export class NewTaskComponent implements OnInit {
   addSubTask() {
     this.subTasks.push(this.formBuilder.control(""));
   }
-  removeTask(i: any) {
+  removeSubTask(i: any): void {
     this.subTasks.removeAt(i);
   }
 

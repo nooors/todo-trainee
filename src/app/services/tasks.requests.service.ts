@@ -27,4 +27,8 @@ export class TasksRequestService {
       headers: headers,
     });
   }
+
+  deleteTask(id: number): Observable<unknown> {
+    return this.http.delete(`${this.BASE_URL}/${id}`);
+  }
 }
