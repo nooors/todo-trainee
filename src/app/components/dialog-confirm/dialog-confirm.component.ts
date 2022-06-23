@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Task } from "src/app/models/task-model";
-import { TasksRequestService } from "src/app/services/tasks.requests.service";
 
 @Component({
   selector: "app-dialog-confirm",
@@ -26,15 +25,13 @@ export class DialogConfirmComponent implements OnInit {
   constructor(
     public dialogConfirmRef: MatDialogRef<DialogConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private httpSrv: TasksRequestService,
   ) {
     this.dataConfirm = data;
     console.log(data);
   }
 
   deleteTask() {
-    this.httpSrv.deleteTask(this.dataConfirm).subscribe();
-    this.dialogConfirmRef.close();
+    this.dialogConfirmRef.close(true);
   }
 
   closeDialog() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import {
   MatDialog,
   MatDialogConfig,
@@ -16,6 +16,7 @@ import { NewTaskComponent } from "../new-task/new-task.component";
 })
 export class TaskDemoComponent implements OnInit {
   @Input() task!: Task;
+  @Output() taskDeleted = new EventEmitter();
 
   constructor(
     private dialogEdit: MatDialog,
@@ -48,7 +49,20 @@ export class TaskDemoComponent implements OnInit {
     // Pass de data to the dialog
     dialogConfirmConfig.data = id;
 
-    this.dialogConfirm.open(DialogConfirmComponent, dialogConfirmConfig);
+    const dialogDelete = this.dialogConfirm.open(
+      DialogConfirmComponent,
+      dialogConfirmConfig,
+    );
+
+    // Subscribe to Observable to know when dialog is closed and if sends message to delete the task
+    dialogDelete.afterClosed().subscribe((payload) => {
+      if (payload) {
+        // Deleting selected task
+        this.taskSrv.deleteTask(id).subscribe();
+        // Notice render component that the amount of tasks has changed, so it needs to re-render the task list
+        this.taskDeleted.emit("borramos la tarea hay que re-renderizar");
+      }
+    });
   }
 
   ngOnInit(): void {}

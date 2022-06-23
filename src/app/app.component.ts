@@ -4,6 +4,7 @@ import { TasksRequestService } from "./services/tasks.requests.service";
 import { Router } from "@angular/router";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { NewTaskComponent } from "./components/new-task/new-task.component";
+import { AdviserService } from "./services/adviser.service";
 
 @Component({
   selector: "app-root",
@@ -18,6 +19,7 @@ export class AppComponent {
     private router: Router,
     // injection material dialog in constructor
     private dialog: MatDialog,
+    private advice: AdviserService,
   ) {}
 
   openDialog() {
@@ -29,7 +31,13 @@ export class AppComponent {
     dialogConfig.autoFocus = true;
     dialogConfig.maxWidth = "50vw";
 
-    this.dialog.open(NewTaskComponent, dialogConfig);
+    const newTask = this.dialog.open(NewTaskComponent, dialogConfig);
+
+    newTask.afterClosed().subscribe((responseForm) => {
+      alert(responseForm);
+      this.taskService.setNewTask(responseForm).subscribe();
+      this.advice.setAdvice(true);
+    });
   }
 
   ngOnInit() {}

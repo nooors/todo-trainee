@@ -44,10 +44,9 @@ export class NewTaskComponent implements OnInit {
 
   submitForm() {
     // Need to build the object to pass to the data base
-    const indexes = this.tasks.map((element) => element.id);
-    const max = Math.max(...indexes);
+
     const newTask: Task = {
-      id: max + 1,
+      id: this.getLastId() + 1,
       title: this.newTaskForm.get("title")?.value,
       taskDate: this.newTaskForm.get("taskDate")?.value,
       deadLine: this.newTaskForm.get("deadLine")?.value,
@@ -55,15 +54,18 @@ export class NewTaskComponent implements OnInit {
       subTasks: this.newTaskForm.get("subTasks")?.value,
       progress: this.newTaskForm.get("progress")?.value,
     };
-    this.httpSrv.setNewTask(newTask).subscribe();
-    this.close();
+    // this.httpSrv.setNewTask(newTask).subscribe(); ---> passing this responsability to the component which opened the dialog
+    this.dialogRef.close(newTask);
   }
 
   close(): void {
-    this.dialogRef.close("false");
+    this.dialogRef.close(false);
   }
-
+  // Because we're faking the API we need to create a new unique index for every entry. So we find the last index to can add 1 in the component simulating an autoincrement field.
   getLastId() {
     this.httpSrv.getTasks().subscribe((tasks) => (this.tasks = tasks));
+    const indexes = this.tasks.map((element) => element.id);
+    const max = Math.max(...indexes);
+    return max;
   }
 }

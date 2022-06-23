@@ -1,7 +1,10 @@
 <div class="tasks-render-wrap">
   <ul class="task-render-ul">
     <li class="task-render-item" *ngFor="let task of tasks">
-      <app-task-demo [task]="task"></app-task-demo>
+      <app-task-demo
+        [task]="task"
+        (taskDeleted)="reload($event)"
+      ></app-task-demo>
     </li>
   </ul>
 </div>

@@ -1,43 +1,11 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "learn Angular",
-      "taskDate": "Wed Jun 15 2022",
-      "deadLine": "",
-      "description": "just the name is cool",
-      "subTasks": [
-        "Get L2",
-        "Find an own place",
-        "Learn Angular",
-        "Rule the world"
-      ],
-      "pogress": "ToDo"
-    },
-    {
       "id": 2,
       "title": "get an appartament",
       "taskDate": "Wed Jun 15 2022",
       "deadLine": "",
       "description": "I need some space",
-      "subTasks": [],
-      "pogress": "ToDo"
-    },
-    {
-      "id": 3,
-      "title": "get a new bike",
-      "taskDate": "Wed Jun 15 2022",
-      "deadLine": "",
-      "description": "or not, not mandatory",
-      "subTasks": [],
-      "pogress": "ToDo"
-    },
-    {
-      "id": 4,
-      "title": "rule the world",
-      "taskDate": "Wed Jun 15 2022",
-      "deadLine": "",
-      "description": "it's inevitable",
       "subTasks": [],
       "pogress": "ToDo"
     },
@@ -56,15 +24,70 @@
     },
     {
       "id": 9,
-      "title": "lalala",
-      "taskDate": "2022-06-21T22:00:00.000Z",
-      "deadLine": "2022-07-20T22:00:00.000Z",
-      "description": "yiuikckc",
+      "title": "Learn Angular",
+      "taskDate": "2022-06-22T22:00:00.000Z",
+      "deadLine": "2022-06-29T22:00:00.000Z",
+      "description": "Learn Angular in order to make projects with the team",
       "subTasks": [
-        "fuif",
-        "kdcikdck"
+        "learn angular",
+        "increase my salary",
+        "find my own place",
+        "Rule the world"
       ],
-      "progress": "Done"
+      "progress": "ToDo"
+    },
+    {
+      "id": 10,
+      "title": "Paranoia in Angular",
+      "taskDate": "2022-06-13T22:00:00.000Z",
+      "deadLine": "2022-06-28T22:00:00.000Z",
+      "description": "asdfasdfasdfadfasdfasfdasdfasdfadsfasdfasdf",
+      "subTasks": [
+        "asdfasdf",
+        "asdfasdfasdf"
+      ],
+      "progress": "ToDo"
+    },
+    {
+      "id": 11,
+      "title": "to delete too",
+      "taskDate": "2022-06-22T22:00:00.000Z",
+      "deadLine": "2022-06-24T22:00:00.000Z",
+      "description": "asdfasdf",
+      "subTasks": [],
+      "progress": "WIP"
+    },
+    {
+      "id": 12,
+      "title": "New task",
+      "taskDate": "2022-06-20T22:00:00.000Z",
+      "deadLine": "2022-06-06T22:00:00.000Z",
+      "description": "fasfasfasdfasdfaasdfasdffasd",
+      "subTasks": [],
+      "progress": "WIP"
+    },
+    {
+      "id": 13,
+      "title": "to delete",
+      "taskDate": "2022-06-13T22:00:00.000Z",
+      "deadLine": "2022-06-28T22:00:00.000Z",
+      "description": "asdfasdasdfasdfasdfasdfadsfadsfasdfasdfadsffasdf",
+      "subTasks": [],
+      "progress": "WIP"
+    },
+    {
+      "id": 14,
+      "title": "Prova re-render",
+      "taskDate": "2022-06-22T22:00:00.000Z",
+      "deadLine": "2022-06-29T22:00:00.000Z",
+      "description": "asdfasdfasdfasdfasdfasdfasdfasdfasd",
+      "subTasks": [
+        "asdfadf",
+        "asdfasdf",
+        "asdfasdf",
+        "asdfasdf"
+      ],
+      "progress": "ToDo"
     }
   ]
 }
