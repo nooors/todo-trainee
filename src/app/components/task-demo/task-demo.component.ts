@@ -24,7 +24,7 @@ export class TaskDemoComponent implements OnInit {
     private taskSrv: TasksRequestService,
   ) {}
 
-  openDialog(id: number): void {
+  openDialog(id: number | Task): void {
     const dialogEditConf = new MatDialogConfig();
     dialogEditConf.maxWidth = "50vw";
     dialogEditConf.disableClose = true;
@@ -35,10 +35,9 @@ export class TaskDemoComponent implements OnInit {
     this.dialogEdit.open(NewTaskComponent, dialogEditConf);
   }
 
-  editTask(id: number) {
-    alert(id);
-    this.taskSrv.getTaskById(id).subscribe((task) => (this.task = task));
-    this.openDialog(id);
+  editTask(task: Task) {
+    // this.taskSrv.getTaskById(id).subscribe((task) => (this.task = task));
+    this.openDialog(task);
   }
   deleteTask(id: number) {
     console.log(id);

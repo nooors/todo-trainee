@@ -35,7 +35,6 @@ export class DialogConfirmComponent implements OnInit {
   }
 
   closeDialog() {
-    alert(this.data);
     this.dialogConfirmRef.close();
   }
 

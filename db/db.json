@@ -37,18 +37,6 @@
       "progress": "ToDo"
     },
     {
-      "id": 10,
-      "title": "Paranoia in Angular",
-      "taskDate": "2022-06-13T22:00:00.000Z",
-      "deadLine": "2022-06-28T22:00:00.000Z",
-      "description": "asdfasdfasdfadfasdfasfdasdfasdfadsfasdfasdf",
-      "subTasks": [
-        "asdfasdf",
-        "asdfasdfasdf"
-      ],
-      "progress": "ToDo"
-    },
-    {
       "id": 11,
       "title": "to delete too",
       "taskDate": "2022-06-22T22:00:00.000Z",

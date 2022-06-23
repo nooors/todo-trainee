@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
+import { Component, Inject, OnInit } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { TasksRequestService } from "src/app/services/tasks.requests.service";
 import { Task } from "src/app/models/task-model";
@@ -11,19 +11,36 @@ import { Task } from "src/app/models/task-model";
 })
 export class NewTaskComponent implements OnInit {
   tasks!: Task[];
+  taskEdit?: Task;
   constructor(
     private dialogRef: MatDialogRef<NewTaskComponent>,
     private formBuilder: FormBuilder,
     private httpSrv: TasksRequestService,
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data?: any,
+  ) {
+    if (data !== null) {
+      this.taskEdit = data;
+      console.log(this.taskEdit?.title);
+      alert("this is Editing");
+    }
+  }
 
   newTaskForm: FormGroup = this.formBuilder.group({
-    title: ["", Validators.required],
-    taskDate: [""],
-    deadLine: ["", Validators.required],
-    description: ["", Validators.required],
+    title: ["this.taskEdit?.title", Validators.required],
+    taskDate: [this.taskEdit?.taskDate],
+    deadLine: [
+      this.taskEdit ? this.taskEdit.deadLine : "",
+      Validators.required,
+    ],
+    description: [
+      this.taskEdit ? this.taskEdit.deadLine : "",
+      Validators.required,
+    ],
     subTasks: this.formBuilder.array([]),
-    progress: ["ToDo", Validators.required],
+    progress: [
+      this.taskEdit ? this.taskEdit.progress : "ToDo",
+      Validators.required,
+    ],
   });
 
   ngOnInit(): void {
@@ -46,7 +63,7 @@ export class NewTaskComponent implements OnInit {
     // Need to build the object to pass to the data base
 
     const newTask: Task = {
-      id: this.getLastId() + 1,
+      id: this.taskEdit ? this.taskEdit.id : this.getLastId() + 1,
       title: this.newTaskForm.get("title")?.value,
       taskDate: this.newTaskForm.get("taskDate")?.value,
       deadLine: this.newTaskForm.get("deadLine")?.value,
