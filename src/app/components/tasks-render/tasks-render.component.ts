@@ -25,10 +25,8 @@ export class TasksRenderComponent implements OnInit {
     this.getTasks();
     this.adviceSubscription = this.advice.advice.subscribe((state) => {
       if (state === true) {
-        console.log(state);
         this.getTasks();
         this.advice.setAdvice(false);
-        this.adviceSubscription.unsubscribe;
       }
     });
   }
@@ -41,7 +39,7 @@ export class TasksRenderComponent implements OnInit {
 
   reload(e: any) {
     // The task list has changed in db, so it needs to render the new task list
-    alert("emit has arrived" + e);
+
     this.getTasks();
   }
 }

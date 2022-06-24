@@ -1,4 +1,4 @@
-<h1 mat-dialog-title class="title">New Task</h1>
+<h1 mat-dialog-title class="title">{{taskEdit ? "Edit Task" : "New Task"}}</h1>
 <form class="new-task-form" [formGroup]="newTaskForm">
   <mat-dialog-content>
     <!-- Title -->

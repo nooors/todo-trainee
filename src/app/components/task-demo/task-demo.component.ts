@@ -5,6 +5,7 @@ import {
   MatDialogRef,
 } from "@angular/material/dialog";
 import { Task } from "src/app/models/task-model";
+import { AdviserService } from "src/app/services/adviser.service";
 import { TasksRequestService } from "src/app/services/tasks.requests.service";
 import { DialogConfirmComponent } from "../dialog-confirm/dialog-confirm.component";
 import { NewTaskComponent } from "../new-task/new-task.component";
@@ -22,6 +23,7 @@ export class TaskDemoComponent implements OnInit {
     private dialogEdit: MatDialog,
     private dialogConfirm: MatDialog,
     private taskSrv: TasksRequestService,
+    private advice: AdviserService,
   ) {}
 
   openDialog(id: number | Task): void {
@@ -32,7 +34,13 @@ export class TaskDemoComponent implements OnInit {
     // Pass the data to the dialog
     dialogEditConf.data = id;
 
-    this.dialogEdit.open(NewTaskComponent, dialogEditConf);
+    const editTask = this.dialogEdit.open(NewTaskComponent, dialogEditConf);
+    editTask.afterClosed().subscribe((payload) => {
+      if (payload !== false) {
+        this.taskSrv.updateTask(payload).subscribe();
+        this.advice.setAdvice(true);
+      }
+    });
   }
 
   editTask(task: Task) {
@@ -40,7 +48,6 @@ export class TaskDemoComponent implements OnInit {
     this.openDialog(task);
   }
   deleteTask(id: number) {
-    console.log(id);
     const dialogConfirmConfig = new MatDialogConfig();
     dialogConfirmConfig.maxWidth = "30vw";
     dialogConfirmConfig.maxHeight = "15vw";

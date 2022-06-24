@@ -27,7 +27,6 @@ export class DialogConfirmComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.dataConfirm = data;
-    console.log(data);
   }
 
   deleteTask() {

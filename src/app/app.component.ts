@@ -34,7 +34,6 @@ export class AppComponent {
     const newTask = this.dialog.open(NewTaskComponent, dialogConfig);
 
     newTask.afterClosed().subscribe((responseForm) => {
-      alert(responseForm);
       this.taskService.setNewTask(responseForm).subscribe();
       this.advice.setAdvice(true);
     });

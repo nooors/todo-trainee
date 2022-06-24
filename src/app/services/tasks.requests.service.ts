@@ -28,6 +28,14 @@ export class TasksRequestService {
     });
   }
 
+  updateTask(task: Task): Observable<Task> {
+    const headers = { "content-type": "application/json" };
+    const body = JSON.stringify(task);
+    return this.http.put<Task>(`${this.BASE_URL}/${task.id}`, body, {
+      headers: headers,
+    });
+  }
+
   deleteTask(id: number): Observable<unknown> {
     return this.http.delete(`${this.BASE_URL}/${id}`);
   }

@@ -55,15 +55,6 @@
       "progress": "WIP"
     },
     {
-      "id": 13,
-      "title": "to delete",
-      "taskDate": "2022-06-13T22:00:00.000Z",
-      "deadLine": "2022-06-28T22:00:00.000Z",
-      "description": "asdfasdasdfasdfasdfasdfadsfadsfasdfasdfadsffasdf",
-      "subTasks": [],
-      "progress": "WIP"
-    },
-    {
       "id": 14,
       "title": "Prova re-render",
       "taskDate": "2022-06-22T22:00:00.000Z",
@@ -71,7 +62,6 @@
       "description": "asdfasdfasdfasdfasdfasdfasdfasdfasd",
       "subTasks": [
         "asdfadf",
-        "asdfasdf",
         "asdfasdf",
         "asdfasdf"
       ],

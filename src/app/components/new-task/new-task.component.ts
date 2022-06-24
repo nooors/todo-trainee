@@ -10,7 +10,9 @@ import { Task } from "src/app/models/task-model";
   styleUrls: ["./new-task.component.scss"],
 })
 export class NewTaskComponent implements OnInit {
+  // Tasks for new Task
   tasks!: Task[];
+  // Tasks for edit Task
   taskEdit?: Task;
   constructor(
     private dialogRef: MatDialogRef<NewTaskComponent>,
@@ -20,32 +22,36 @@ export class NewTaskComponent implements OnInit {
   ) {
     if (data !== null) {
       this.taskEdit = data;
-      console.log(this.taskEdit?.title);
-      alert("this is Editing");
     }
   }
 
   newTaskForm: FormGroup = this.formBuilder.group({
-    title: ["this.taskEdit?.title", Validators.required],
-    taskDate: [this.taskEdit?.taskDate],
-    deadLine: [
-      this.taskEdit ? this.taskEdit.deadLine : "",
-      Validators.required,
-    ],
-    description: [
-      this.taskEdit ? this.taskEdit.deadLine : "",
-      Validators.required,
-    ],
+    title: ["", Validators.required],
+    taskDate: [],
+    deadLine: ["", Validators.required],
+    description: ["", Validators.required],
     subTasks: this.formBuilder.array([]),
-    progress: [
-      this.taskEdit ? this.taskEdit.progress : "ToDo",
-      Validators.required,
-    ],
+    progress: ["ToDo", Validators.required],
   });
 
   ngOnInit(): void {
+    // if taskEdit exists it means the component is been used to Edit the task, so we provide the values of the task to the formGroup
+    if (this.taskEdit) {
+      this.newTaskForm.reset({
+        title: this.taskEdit.title,
+        taskDate: this.taskEdit.taskDate,
+        deadLine: this.taskEdit.deadLine,
+        description: this.taskEdit.description,
+        subTasks: this.taskEdit.subTasks,
+        progress: this.taskEdit.progress,
+      });
+      // For each subtask we need to create a control and provide the newTaskFrom.subTask value as default value.
+      this.taskEdit.subTasks.map((subtask) =>
+        this.subTasks.push(this.formBuilder.control(subtask)),
+      );
+    }
+
     this.getLastId();
-    console.log(this.tasks);
   }
 
   get subTasks() {
