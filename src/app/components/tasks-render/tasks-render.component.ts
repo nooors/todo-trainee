@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Task } from "../../models/task-model";
 
-import { TasksRequestService } from "src/app/services/tasks.requests.service";
+// import { TasksRequestService } from "src/app/services/tasks.requests.service"; --> service to fetch data from json-server
 
 import { TaskDemoComponent } from "../task-demo/task-demo.component";
 import { AdviserService } from "src/app/services/adviser.service";
 import { Subscription } from "rxjs";
+import { SupabaseService } from "src/app/services/supabase.service";
 
 @Component({
   selector: "app-tasks-render",
@@ -13,11 +14,13 @@ import { Subscription } from "rxjs";
   styleUrls: ["./tasks-render.component.scss"],
 })
 export class TasksRenderComponent implements OnInit {
-  tasks!: Task[];
+  tasks!: Task[] | null;
   adviceSubscription!: Subscription;
+  getTasksVariable!: any;
 
   constructor(
-    private TasksSvc: TasksRequestService,
+    // private TasksSvc: TasksRequestService,  --> this service was used to conect with json-server fake API
+    private supabaseApi: SupabaseService,
 
     public advice: AdviserService,
   ) {}
@@ -33,8 +36,10 @@ export class TasksRenderComponent implements OnInit {
   ngOnChages(): void {
     this.getTasks();
   }
-  getTasks() {
-    this.TasksSvc.getTasks().subscribe((tasks) => (this.tasks = tasks));
+  async getTasks() {
+    // this.TasksSvc.getTasks().subscribe((tasks) => (this.tasks = tasks)); --> this method belongs to the service used to conect with json-server API
+    const { data, error } = await this.supabaseApi.getTasks();
+    this.tasks = data;
   }
 
   reload(e: any) {

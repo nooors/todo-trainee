@@ -6,7 +6,8 @@ import {
 } from "@angular/material/dialog";
 import { Task } from "src/app/models/task-model";
 import { AdviserService } from "src/app/services/adviser.service";
-import { TasksRequestService } from "src/app/services/tasks.requests.service";
+import { SupabaseService } from "src/app/services/supabase.service";
+// import { TasksRequestService } from "src/app/services/tasks.requests.service"; ---> used to fetch data in local from json-server
 import { DialogConfirmComponent } from "../dialog-confirm/dialog-confirm.component";
 import { NewTaskComponent } from "../new-task/new-task.component";
 
@@ -22,7 +23,8 @@ export class TaskDemoComponent implements OnInit {
   constructor(
     private dialogEdit: MatDialog,
     private dialogConfirm: MatDialog,
-    private taskSrv: TasksRequestService,
+    // private taskSrv: TasksRequestService, --> this service was used to fetch data from fake API json-server in local
+    private supabase: SupabaseService,
     private advice: AdviserService,
   ) {}
 
@@ -37,8 +39,8 @@ export class TaskDemoComponent implements OnInit {
     const editTask = this.dialogEdit.open(NewTaskComponent, dialogEditConf);
     editTask.afterClosed().subscribe((payload) => {
       if (payload !== false) {
-        this.taskSrv.updateTask(payload).subscribe();
-        this.advice.setAdvice(true);
+        // this.taskSrv.updateTask(payload).subscribe(); --> method from de service used to fetch data from json-server
+        this.updateTask(payload.id, payload);
       }
     });
   }
@@ -47,7 +49,7 @@ export class TaskDemoComponent implements OnInit {
     // this.taskSrv.getTaskById(id).subscribe((task) => (this.task = task));
     this.openDialog(task);
   }
-  deleteTask(id: number) {
+  deleteTask(id: number | null) {
     const dialogConfirmConfig = new MatDialogConfig();
     dialogConfirmConfig.maxWidth = "30vw";
     dialogConfirmConfig.maxHeight = "15vw";
@@ -62,13 +64,24 @@ export class TaskDemoComponent implements OnInit {
 
     // Subscribe to Observable to know when dialog is closed and if sends message to delete the task
     dialogDelete.afterClosed().subscribe((payload) => {
+      alert("deleting: " + payload);
       if (payload) {
         // Deleting selected task
-        this.taskSrv.deleteTask(id).subscribe();
+        // this.taskSrv.deleteTask(id).subscribe(); ---> used to delete item in local json-server
+        this.eraseTask(payload);
         // Notice render component that the amount of tasks has changed, so it needs to re-render the task list
-        this.taskDeleted.emit("borramos la tarea hay que re-renderizar");
+        this.advice.setAdvice(true);
       }
     });
+  }
+
+  async updateTask(id: number, task: Task) {
+    await this.supabase.updateTask(id, task);
+    this.advice.setAdvice(true);
+  }
+
+  async eraseTask(id: number) {
+    await this.supabase.deleteTask(id);
   }
 
   ngOnInit(): void {}

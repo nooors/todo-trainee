@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { TasksRequestService } from "src/app/services/tasks.requests.service";
 import { Task } from "src/app/models/task-model";
+import { SupabaseService } from "src/app/services/supabase.service";
 
 @Component({
   selector: "app-new-task",
@@ -17,7 +18,8 @@ export class NewTaskComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<NewTaskComponent>,
     private formBuilder: FormBuilder,
-    private httpSrv: TasksRequestService,
+    // private httpSrv: TasksRequestService, ----> used to fetch data from local json-server
+    private supabaseSrv: SupabaseService,
     @Inject(MAT_DIALOG_DATA) public data?: any,
   ) {
     if (data !== null) {
@@ -51,7 +53,7 @@ export class NewTaskComponent implements OnInit {
       );
     }
 
-    this.getLastId();
+    // this.getLastId();--> used when needed create fake id for json-sever
   }
 
   get subTasks() {
@@ -68,14 +70,14 @@ export class NewTaskComponent implements OnInit {
   submitForm() {
     // Need to build the object to pass to the data base
 
-    const newTask: Task = {
-      id: this.taskEdit ? this.taskEdit.id : this.getLastId() + 1,
+    const newTask: Task | any = {
       title: this.newTaskForm.get("title")?.value,
       taskDate: this.newTaskForm.get("taskDate")?.value,
       deadLine: this.newTaskForm.get("deadLine")?.value,
       description: this.newTaskForm.get("description")?.value,
       subTasks: this.newTaskForm.get("subTasks")?.value,
       progress: this.newTaskForm.get("progress")?.value,
+      ...(this.taskEdit?.id && { id: this.taskEdit.id }),
     };
     // this.httpSrv.setNewTask(newTask).subscribe(); ---> passing this responsability to the component which opened the dialog
     this.dialogRef.close(newTask);
@@ -85,10 +87,11 @@ export class NewTaskComponent implements OnInit {
     this.dialogRef.close(false);
   }
   // Because we're faking the API we need to create a new unique index for every entry. So we find the last index to can add 1 in the component simulating an autoincrement field.
-  getLastId() {
-    this.httpSrv.getTasks().subscribe((tasks) => (this.tasks = tasks));
-    const indexes = this.tasks.map((element) => element.id);
-    const max = Math.max(...indexes);
-    return max;
-  }
+  // --- We don't need this method since we fetch data from supabase API which provides id automatically
+  // getLastId() {
+  //   this.httpSrv.getTasks().subscribe((tasks) => (this.tasks = tasks));
+  //   const indexes = this.tasks.map((element) => element.id);
+  //   const max = Math.max(...indexes);
+  //   return max;
+  // }
 }
