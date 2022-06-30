@@ -15,6 +15,7 @@ import { SupabaseService } from "./services/supabase.service";
 export class AppComponent {
   title = "todo-trainee";
   tasks!: Task[];
+  whereTo: string = "";
   constructor(
     // private taskService: TasksRequestService, ---> service to fetch data from local json-server
     private supabaseSrv: SupabaseService,

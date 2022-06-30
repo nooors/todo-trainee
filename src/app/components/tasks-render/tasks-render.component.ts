@@ -7,6 +7,7 @@ import { TaskDemoComponent } from "../task-demo/task-demo.component";
 import { AdviserService } from "src/app/services/adviser.service";
 import { Subscription } from "rxjs";
 import { SupabaseService } from "src/app/services/supabase.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-tasks-render",
@@ -23,9 +24,16 @@ export class TasksRenderComponent implements OnInit {
     private supabaseApi: SupabaseService,
 
     public advice: AdviserService,
+    private actRoute: ActivatedRoute,
   ) {}
   ngOnInit(): void {
-    this.getTasks();
+    this.actRoute.params.subscribe((params): void => {
+      Object.keys(params).length === 0
+        ? this.getTasks()
+        : this.getTasksTodos("progress", params["progress"]);
+      console.log(params);
+    });
+
     this.adviceSubscription = this.advice.advice.subscribe((state) => {
       if (state === true) {
         this.getTasks();
@@ -39,6 +47,11 @@ export class TasksRenderComponent implements OnInit {
   async getTasks() {
     // this.TasksSvc.getTasks().subscribe((tasks) => (this.tasks = tasks)); --> this method belongs to the service used to conect with json-server API
     const { data, error } = await this.supabaseApi.getTasks();
+    this.tasks = data;
+  }
+
+  async getTasksTodos(todo: string, item: string) {
+    const { data, error } = await this.supabaseApi.getTaskByItem(todo, item);
     this.tasks = data;
   }
 

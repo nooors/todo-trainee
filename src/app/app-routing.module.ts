@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 
 const routes: Routes = [
   { path: "task", component: TaskCardComponent },
+  { path: "tasks/:progress", component: TasksRenderComponent },
   { path: "tasks", component: TasksRenderComponent },
   { path: "", redirectTo: "", pathMatch: "full" },
   { path: "**", component: PageNotFoundComponent },

@@ -19,9 +19,15 @@
   </div>
 </div>
 <nav class="navbar">
-  <button mat-raised-button color="accent">To do</button>
-  <button mat-raised-button color="accent">On going</button>
-  <button mat-raised-button color="accent">Done</button>
+  <button mat-raised-button color="accent" [routerLink]="['/tasks', 'ToDo']">
+    To do
+  </button>
+  <button mat-raised-button color="accent" [routerLink]="['/tasks', 'WIP']">
+    On going
+  </button>
+  <button mat-raised-button color="accent" [routerLink]="['/tasks', 'Done']">
+    Done
+  </button>
 </nav>
 
 <router-outlet></router-outlet>

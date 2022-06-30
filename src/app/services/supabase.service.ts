@@ -22,6 +22,10 @@ export class SupabaseService {
     return this.supabase.from("tasks").select("*").eq("id", id);
   }
 
+  getTaskByItem(item: string, value: string) {
+    return this.supabase.from("tasks").select("*").eq(item, value);
+  }
+
   addNewTask(task: Task) {
     return this.supabase.from("tasks").insert(task);
   }
