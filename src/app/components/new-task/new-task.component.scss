@@ -1,12 +1,36 @@
+.mat-dialog-container.ng-tns-c72-5.ng-trigger.ng-trigger-dialogContainer.ng-star-inserted {
+    padding: 3rem;
+}
+
+.mat-dialog-content{
+    overflow: hidden;
+}
+
 h1.mat-h1.title{
     font-weight: 700;
 }
 
 .new-task-form{
-    padding: 2rem;
+    padding: 1rem;
 }
 
-mat-dialog-content{
-    display: flex;
-    flex-flow: wrap column;
+.formArray{
+    margin-bottom: 1rem;
+}
+
+h2{
+    margin-bottom: 0;
+}
+
+.mat-icon-button{
+    width: 0;
+    height: 0;
+}
+
+.separator{
+    margin-bottom: 1rem
+}
+
+mat-radio-button{
+    margin: 1rem;
 }

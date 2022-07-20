@@ -32,7 +32,9 @@ export class AppComponent {
     dialogConfig.disableClose = true;
     // Focus automatically set on the first form field of the dialog
     dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = "30vw";
     dialogConfig.maxWidth = "50vw";
+    dialogConfig.minHeight = "70vh";
 
     const newTask = this.dialog.open(NewTaskComponent, dialogConfig);
 
@@ -49,6 +51,7 @@ export class AppComponent {
   }
   async addNewTask(task: Task) {
     await this.supabaseSrv.addNewTask(task);
+    // inform to the service some data changed in database to fecth that data and rerender list.
     this.advice.setAdvice(true);
   }
 }

@@ -3,6 +3,7 @@
     max-width: 30%;
     min-width: 200px;
     position: relative;
+    margin-bottom: 1.5rem;
     @include mat.elevation(5);
 }
 .title-wrapper{
