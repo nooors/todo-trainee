@@ -1,10 +1,12 @@
-<div class="tasks-render-wrap">
-  <ul class="task-render-ul">
-    <li class="task-render-item" *ngFor="let task of tasks">
-      <app-task-demo
-        [task]="task"
-        (taskDeleted)="reload($event)"
-      ></app-task-demo>
-    </li>
-  </ul>
+<div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px">
+  <div
+    fxFlex="15"
+    fxFlex.lg="18"
+    fxFlex.md="27"
+    fxFlex.sm="38"
+    fxFlex.xs="50"
+    *ngFor="let task of tasks"
+  >
+    <app-task-demo [task]="task" (taskDeleted)="reload($event)"></app-task-demo>
+  </div>
 </div>

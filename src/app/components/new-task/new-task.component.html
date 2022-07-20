@@ -1,85 +1,108 @@
-<h1 mat-dialog-title class="title">{{taskEdit ? "Edit Task" : "New Task"}}</h1>
-<form class="new-task-form" [formGroup]="newTaskForm">
-  <mat-dialog-content>
-    <!-- Title -->
-    <mat-form-field class="whatever">
-      <mat-label for="title">Title</mat-label>
-      <input type="text" name="title" matInput formControlName="title" />
-    </mat-form-field>
-    <!-- Date picker for initial Date -->
-    <mat-form-field class="whaterver">
-      <mat-label for="dateTask">Select starting date</mat-label>
-      <input
-        matInput
-        readonly
-        [matDatepicker]="initialDate"
-        formControlName="taskDate"
-      />
-      <mat-datepicker-toggle
-        matSuffix
-        [for]="initialDate"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #initialDate disabled="false"></mat-datepicker>
-    </mat-form-field>
-    <!-- Date picker for dead line -->
-    <mat-form-field class="whaterver">
-      <mat-label for="deadLine">Select dead line date</mat-label>
-      <input
-        matInput
-        readonly
-        [matDatepicker]="lastDate"
-        formControlName="deadLine"
-      />
-      <mat-datepicker-toggle matSuffix [for]="lastDate"></mat-datepicker-toggle>
-      <mat-datepicker #lastDate disabled="false"></mat-datepicker>
-    </mat-form-field>
-    <!-- Text area for description -->
-    <mat-form-field class="whatever">
-      <mat-label for="description">Description</mat-label>
-      <textarea
-        name="descrption"
-        matInput
-        formControlName="description"
-      ></textarea>
-    </mat-form-field>
-    <!-- Subtasks -->
-    <div formArrayName="subTasks">
-      <h2>Subtastks</h2>
-      <button mat-icon-button (click)="addSubTask()">
-        <mat-icon class="add-course-btn">add</mat-icon>
-      </button>
-      <ng-container *ngFor="let subTask of subTasks.controls; let i = index"
-        ><mat-form-field class="select-array">
-          <mat-label>new task</mat-label>
-          <input matInput type="text" [formControlName]="i" /><button
-            mat-icon-button
+<div fxLayout="column wrap">
+  <h1 mat-dialog-title class="title">
+    {{taskEdit ? "Edit Task" : "New Task"}}
+  </h1>
+
+  <form
+    class="new-task-form"
+    [formGroup]="newTaskForm"
+    fxLayout="column wrap"
+    fxLayoutAlign="center"
+  >
+    <mat-dialog-content fxLayout="column wrap">
+      <!-- Title -->
+      <mat-form-field class="whatever" autocomplete="off">
+        <mat-label for="title">Title</mat-label>
+        <input
+          type="text"
+          name="title"
+          matInput
+          formControlName="title"
+          autocomplete="off"
+        />
+      </mat-form-field>
+      <!-- Date picker for initial Date -->
+      <div class="date-picker" fxLayout="row wrap" fxLayoutGap="20px">
+        <mat-form-field class="whaterver">
+          <mat-label for="dateTask">Select starting date</mat-label>
+          <input
+            matInput
+            readonly
+            [matDatepicker]="initialDate"
+            formControlName="taskDate"
+          />
+          <mat-datepicker-toggle
             matSuffix
-            (click)="removeSubTask(i)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
+            [for]="initialDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #initialDate disabled="false"></mat-datepicker>
         </mat-form-field>
-      </ng-container>
-    </div>
-    <!-- Progress -->
-    <mat-radio-group formControlName="progress">
-      <mat-radio-button value="ToDo">ToDo</mat-radio-button>
-      <mat-radio-button value="WIP">WIP</mat-radio-button>
-      <mat-radio-button value="Done">Done</mat-radio-button>
-    </mat-radio-group>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-raised-button color="accent" (click)="close()">
-      Close
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="!newTaskForm.valid"
-      (click)="submitForm()"
-    >
-      Submit
-    </button>
-  </mat-dialog-actions>
-</form>
+        <!-- Date picker for dead line -->
+        <mat-form-field class="whaterver">
+          <mat-label for="deadLine">Select dead line date</mat-label>
+          <input
+            matInput
+            readonly
+            [matDatepicker]="lastDate"
+            formControlName="deadLine"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="lastDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #lastDate disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <!-- Text area for description -->
+      <mat-form-field class="whatever">
+        <mat-label for="description">Description</mat-label>
+        <textarea
+          name="descrption"
+          matInput
+          formControlName="description"
+        ></textarea>
+      </mat-form-field>
+      <!-- Subtasks -->
+      <div class="formArray" formArrayName="subTasks">
+        <h2>Subtastks</h2>
+        <button mat-icon-button (click)="addSubTask()">
+          <mat-icon>add_course_btn</mat-icon>
+        </button>
+        <div class="separator"></div>
+        <ng-container *ngFor="let subTask of subTasks.controls; let i = index"
+          ><mat-form-field class="select-array" fxLayout="columnn wrap">
+            <mat-label>new task</mat-label>
+            <input matInput type="text" [formControlName]="i" /><button
+              mat-icon-button
+              matSuffix
+              (click)="removeSubTask(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-form-field>
+        </ng-container>
+      </div>
+      <!-- Progress -->
+      <mat-radio-group formControlName="progress">
+        <mat-radio-button value="ToDo">ToDo</mat-radio-button>
+        <mat-radio-button value="WIP">WIP</mat-radio-button>
+        <mat-radio-button value="Done">Done</mat-radio-button>
+      </mat-radio-group>
+    </mat-dialog-content>
+    <div class="separator"></div>
+    <mat-dialog-actions>
+      <button mat-raised-button color="accent" (click)="close()">
+        Close
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!newTaskForm.valid"
+        (click)="submitForm()"
+      >
+        Submit
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>
