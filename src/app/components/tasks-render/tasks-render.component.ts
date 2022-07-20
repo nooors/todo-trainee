@@ -3,7 +3,6 @@ import { Task } from "../../models/task-model";
 
 // import { TasksRequestService } from "src/app/services/tasks.requests.service"; --> service to fetch data from json-server
 
-import { TaskDemoComponent } from "../task-demo/task-demo.component";
 import { AdviserService } from "src/app/services/adviser.service";
 import { Subscription } from "rxjs";
 import { SupabaseService } from "src/app/services/supabase.service";
@@ -27,11 +26,12 @@ export class TasksRenderComponent implements OnInit {
     private actRoute: ActivatedRoute,
   ) {}
   ngOnInit(): void {
+
+    // if don't have params request all the task list, if have params enum: Params, request taks by 'progress field'
     this.actRoute.params.subscribe((params): void => {
       Object.keys(params).length === 0
         ? this.getTasks()
         : this.getTasksTodos("progress", params["progress"]);
-      console.log(params);
     });
 
     this.adviceSubscription = this.advice.advice.subscribe((state) => {

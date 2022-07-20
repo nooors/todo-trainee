@@ -49,7 +49,7 @@ export class TaskDemoComponent implements OnInit {
     // this.taskSrv.getTaskById(id).subscribe((task) => (this.task = task));
     this.openDialog(task);
   }
-  deleteTask(id: number | null) {
+  deleteTask(id: number) {
     const dialogConfirmConfig = new MatDialogConfig();
     dialogConfirmConfig.maxWidth = "30vw";
     dialogConfirmConfig.maxHeight = "15vw";
@@ -64,25 +64,28 @@ export class TaskDemoComponent implements OnInit {
 
     // Subscribe to Observable to know when dialog is closed and if sends message to delete the task
     dialogDelete.afterClosed().subscribe((payload) => {
-      alert("deleting: " + payload);
       if (payload) {
         // Deleting selected task
         // this.taskSrv.deleteTask(id).subscribe(); ---> used to delete item in local json-server
-        this.eraseTask(payload);
+        this.eraseTask(id);
         // Notice render component that the amount of tasks has changed, so it needs to re-render the task list
-        this.advice.setAdvice(true);
+        
       }
     });
   }
 
   async updateTask(id: number, task: Task) {
     await this.supabase.updateTask(id, task);
+    // tell the service the task lista has changed so render component has to re-render
     this.advice.setAdvice(true);
   }
 
   async eraseTask(id: number) {
     await this.supabase.deleteTask(id);
+    this.advice.setAdvice(true);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.advice.advice.subscribe();
+  }
 }
